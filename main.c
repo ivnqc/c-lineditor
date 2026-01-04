@@ -6,9 +6,9 @@
 int main(int argc, char *argv[])
 {
     // Ensure proper usage
-    if (argc < 2)
+    if (argc != 2)
     {
-        printf("Usage: %s <file>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <file>\n", argv[0]);
         return 1;
     }
 
