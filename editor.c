@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,65 +10,52 @@
 // File I/O
 
 // Load a file into memory
-char **load_file(const char *filename, Document *my_file)
+int load_file(const char *filename, Document *my_file)
 {
-    // Temp storage for each line
-    char buffer[MAX_LINE];
-
-    // Name the file
     my_file->filename = strdup(filename);
     if (!my_file->filename)
     {
         printf("strdup() failed.\n");
-        return NULL;
+        return 0;
     }
-    // Open filename in read mode (*file points to it)
+    
     FILE *file = fopen(filename, "r");
-    // Return a pointer to a potential new file
-    if (file == NULL && my_file->filename != NULL)
+    // Allow new files to be created while still reporting genuine I/O failures
+    if (!file)
     {
-        return my_file->lines;
+        if (errno == ENOENT) return 1;
+        
+        printf("Could not open file.\n");
+        free(my_file->filename);
+        my_file->filename = NULL;
+        return 0;
     }
 
-    // Loop read from file no more than MAX_LINE and put it into buffer
+    char buffer[MAX_LINE];
     while (fgets(buffer, MAX_LINE, file))
     {
-        // Temporary pointer to prevent memory leak
-        // Resize the lines pointer by (8 * count + 1) byte
         char **new_size = realloc(my_file->lines, sizeof(char*) * (my_file->count + 1));
         if (!new_size)
         {
             printf("realloc() failed.\n");
             free_file(my_file);
-            return my_file->lines;
+            return 0;
         }
-
-        // Update pointer
         my_file->lines = new_size;
 
-        // Allocate memory for the new line
         my_file->lines[my_file->count] = malloc(strlen(buffer) + 1);
         if (!my_file->lines[my_file->count])
         {
             printf("malloc() failed.\n");
             free_file(my_file);
-            return my_file->lines;
+            return 0;
         }
-
-        // Copy buffer into the allocated memory
         strcpy(my_file->lines[my_file->count], buffer);
-        // Update line count
         my_file->count++;;
     }
-
-    // Close the opened file
     fclose(file);
-
-    // Not a new file since fgets succeed
     my_file->new = 0;
-
-    // Return the lines pointer
-    return my_file->lines;
+    return 1;
 }
 
 // Save the file and any changes made
