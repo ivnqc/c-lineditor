@@ -1,11 +1,9 @@
-// Define EDITOR_H if it is not currently defined
 #ifndef EDITOR_H
 #define EDITOR_H
 
 // Maximum length per line
 #define MAX_LINE 1024
 
-// Represent a text document/file, including its content and state
 typedef struct Document {
     char **lines; // Allocated strings
     int count; // Total allocated strings
@@ -19,7 +17,7 @@ typedef struct Document {
 // File I/O
 
 // Load a file into memory
-char **load_file(const char *filename, Document *my_file);
+int load_file(const char *filename, Document *my_file);
 // Save the file and any changes made
 int save_file(Document *my_file);
 
