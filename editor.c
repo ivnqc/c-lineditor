@@ -26,8 +26,7 @@ int load_file(const char *filename, Document *my_file)
         if (errno == ENOENT) return 1;
         
         printf("Could not open file.\n");
-        free(my_file->filename);
-        my_file->filename = NULL;
+        free_file(my_file);
         return 0;
     }
 
