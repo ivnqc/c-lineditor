@@ -45,6 +45,6 @@ void edit_line(Document *my_file);
 // Insert a line in a specific place
 char **insert_line(Document *my_file);
 // Print the file content
-void print_file(Document *my_file)
+void print_file(Document *my_file);
 
 #endif
