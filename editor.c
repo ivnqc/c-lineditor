@@ -82,7 +82,6 @@ void clear_stdin(void)
 // Initialize a Document structure
 void document_init(Document *my_file)
 {
-    // Strings have not yet been allocated
     my_file->lines = NULL;
     my_file->count = 0;
     my_file->changed = 0;
