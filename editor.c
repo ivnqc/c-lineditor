@@ -61,25 +61,13 @@ int load_file(const char *filename, Document *my_file)
 // Save the file and any changes made
 int save_file(Document *my_file)
 {
-    // Open filename in write mode (*file points to it)
     FILE *file = fopen(my_file->filename, "w");
-    // Ensure file opened
-    if (!file)
-    {
-        return 0;
-    }
+    if (!file) return 0;
 
-    // Loop through each line
     for (int i = 0; i < my_file->count; i++)
-    {
-        // Write lines[i] into file
         fputs(my_file->lines[i], file);
-    }
 
-    // Close the opened file
     fclose(file);
-
-    // Save succeeded
     return 1;
 }
 
