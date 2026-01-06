@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     Document myfile;
     document_init(&myfile);
 
-    if (!load_file(argv[1], &myfile);)
+    if (!load_file(argv[1], &myfile))
     {
         printf("Error loading file.\n");
         return 1;
