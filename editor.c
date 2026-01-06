@@ -92,24 +92,16 @@ void document_init(Document *my_file)
 // Deallocate requested memory
 void free_file(Document *my_file)
 {
-
-    // Deallocate memory that could have been used by the new file
-    if (my_file->lines == NULL && my_file->filename != NULL)
-    {
+    if (my_file->filename)
         free(my_file->filename);
-        my_file->filename = NULL;
-        return;
-    }
 
-    // Deallocate strings
-    for (int i = 0; i < my_file->count; i++)
+    if (my_file->lines)
     {
-        free(my_file->lines[i]);
+        for (int i = 0; i < my_file->count; i++)
+            free(my_file->lines[i]);
+        
+        free(my_file->lines);
     }
-    free(my_file->lines);
-    free(my_file->filename);
-
-    // Set the file to its initial state
     document_init(my_file);
 }
 
