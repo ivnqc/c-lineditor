@@ -15,7 +15,7 @@ int load_file(const char *filename, Document *my_file)
     my_file->filename = strdup(filename);
     if (!my_file->filename)
     {
-        printf("strdup() failed.\n");
+        fprintf(stderr, "%s: strdup failed.\n", __func__);
         return 0;
     }
     
@@ -25,7 +25,7 @@ int load_file(const char *filename, Document *my_file)
     {
         if (errno == ENOENT) return 1;
         
-        printf("Could not open file.\n");
+        perror("fopen failed");
         free_file(my_file);
         return 0;
     }
@@ -36,7 +36,7 @@ int load_file(const char *filename, Document *my_file)
         char **new_size = realloc(my_file->lines, sizeof(char*) * (my_file->count + 1));
         if (!new_size)
         {
-            printf("realloc() failed.\n");
+            fprintf(stderr, "%s: realloc failed.\n", __func__);
             free_file(my_file);
             return 0;
         }
@@ -45,7 +45,7 @@ int load_file(const char *filename, Document *my_file)
         my_file->lines[my_file->count] = malloc(strlen(buffer) + 1);
         if (!my_file->lines[my_file->count])
         {
-            printf("malloc() failed.\n");
+            fprintf(stderr, "%s: malloc failed.\n", __func__);
             free_file(my_file);
             return 0;
         }
@@ -144,7 +144,7 @@ int append_line(Document *my_file)
     char **new_size = realloc(my_file->lines, sizeof(char*) * (my_file->count + 1));
     if (!new_size)
     {
-        printf("realloc() failed.\n");
+        fprintf(stderr, "%s: realloc failed.\n", __func__);
         return 0;
     }
     
@@ -153,7 +153,7 @@ int append_line(Document *my_file)
     my_file->lines[my_file->count] = malloc(strlen(buffer) + 1);
     if (!my_file->lines[my_file->count])
     {
-        printf("malloc() failed.\n");
+        fprintf(stderr, "%s: malloc failed.\n", __func__);
         return 0;
     }
 
@@ -197,7 +197,7 @@ int delete_line(Document *my_file)
         }
         else
         {
-            printf("realloc() failed.\n");
+            fprintf(stderr, "%s: realloc failed.\n", __func__);
             return 0;
         }
     }
@@ -240,7 +240,7 @@ int edit_line(Document *my_file)
     char *new_line = malloc(strlen(buffer) + 1);
     if (!new_line)
     {
-        printf("malloc() failed.\n");
+        fprintf(stderr, "%s: malloc failed.\n", __func__);
         return 0;
     }
 
@@ -275,7 +275,7 @@ int insert_line(Document *my_file)
     char **new_size = realloc(my_file->lines, sizeof(char*) * (my_file->count + 1));
     if (!new_size)
     {
-        printf("realloc() failed.\n");
+        fprintf(stderr, "%s: realloc failed.\n", __func__);
         return 0;
     }
 
@@ -284,7 +284,7 @@ int insert_line(Document *my_file)
     char *new_line =  malloc(strlen(buffer) + 1);
     if (!new_line)
     {
-        printf("malloc() failed.\n");
+        fprintf(stderr, "%s: malloc failed.\n", __func__);
         return 0;
     }
 

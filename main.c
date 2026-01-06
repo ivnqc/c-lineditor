@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     if (!load_file(argv[1], &myfile))
     {
-        printf("Error loading file.\n");
+        fprintf(stderr, "Error loading file.\n");
         return 1;
     }
 
