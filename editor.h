@@ -35,13 +35,13 @@ int get_option(int *n);
 // Operations
 
 // Add a line at the end
-char **append_line(Document *my_file);
+int append_line(Document *my_file);
 // Delete a specific line
-char **delete_line(Document *my_file);
+int delete_line(Document *my_file);
 // Edit a specific line
-void edit_line(Document *my_file);
+int edit_line(Document *my_file);
 // Insert a line in a specific place
-char **insert_line(Document *my_file);
+int insert_line(Document *my_file);
 // Print the file content
 void print_file(Document *my_file);
 

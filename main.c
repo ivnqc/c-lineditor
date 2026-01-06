@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     {
         print_file(&myfile);
 
-        printf("\nOptions:\n");
+        printf("Options:\n");
         printf("[1] Edit\n");
         printf("[2] Delete\n");
         printf("[3] Append\n");
@@ -49,13 +49,27 @@ int main(int argc, char *argv[])
 
         switch (option)
         {
-            case 1: edit_line(&myfile); break;
-            case 2: myfile.lines = delete_line(&myfile); break;
-            case 3: myfile.lines = append_line(&myfile); break;
-            case 4: myfile.lines = insert_line(&myfile); break;
-            case 5: save = 1; running = 0; break;
-            case 6: running = 0; break;
-            default: continue;
+            case 1: 
+                edit_line(&myfile); 
+                break;
+            case 2: 
+                delete_line(&myfile); 
+                break;
+            case 3:
+                append_line(&myfile); 
+                break;
+            case 4:
+                insert_line(&myfile);
+                break;
+            case 5:
+                save = 1;
+                running = 0;
+                break;
+            case 6:
+                running = 0;
+                break;
+            default:
+                continue;
         }
     }
 
