@@ -167,10 +167,9 @@ int delete_line(Document *my_file)
         return 0;
     }
 
-    int line = 0;
     printf("Delete which line? (%d-%d): ", my_file->count ? 1 : 0, my_file->count);
-    int valid = get_option(&line);
-    if (!valid || (line < 1 || line > my_file->count))
+    int line = 0;
+    if (!get_option(&line) || line < 1 || line > my_file->count)
     {
         printf("Invalid line number\n");
         return 0;
@@ -215,10 +214,9 @@ int edit_line(Document *my_file)
         return 0;
     }
 
-    int line = 0;
     printf("Edit which line? (%d-%d): ", my_file->count ? 1 : 0, my_file->count);
-    int valid = get_option(&line);
-    if (!valid || (line < 1 || line > my_file->count))
+    int line = 0;
+    if (!get_option(&line) || line < 1 || line > my_file->count)
     {
         printf("Invalid line number\n");
         return 0;
@@ -252,11 +250,10 @@ int insert_line(Document *my_file)
 {
     if (!my_file->count)
         return append_line(my_file);
-
-    int line = 0;
+    
     printf("Insert at which line? (%d-%d): ", my_file->count ? 1 : 0, my_file->count ? my_file->count : 0);
-    int valid = get_option(&line);
-    if (!valid || line < 1 || line > my_file->count)
+    int line = 0;
+    if (!get_option(&line) || line < 1 || line > my_file->count)
     {
         printf("Invalid line number\n");
         return 0;
