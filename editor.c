@@ -108,27 +108,21 @@ void free_file(Document *my_file)
 // Read a single positive int from stdin
 int get_option(int *n)
 {
-    char c;
+    int c, temp;
 
-    // Is it even a number?
-    if (scanf("%d", n) != 1)
+    if (scanf("%d", &temp) != 1 || temp < 1)
     {
         clear_stdin();
         return 0;
     }
-    // Is it a positive number?
-    if (*n <= 0)
-    {
-        clear_stdin();
-        return 0;
-    }
-    // Is there any junk after the number?
+
     c = getchar();
     if (c != '\n')
     {
         clear_stdin();
         return 0;
     }
+    *n = temp;
     return 1;
 }
 
