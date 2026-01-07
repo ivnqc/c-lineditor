@@ -39,9 +39,7 @@ int main(int argc, char *argv[])
 
         // Ensure the program proceeds only after a valid menu choice
         int option = 0;
-        int valid = get_option(&option);
-
-        if (!valid || (option < 1 || option > 6))
+        if (!get_option(&option) || option < 1 || option > 6)
         {
             printf("Invalid option.\n");
             continue;
