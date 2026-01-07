@@ -182,7 +182,7 @@ int delete_line(Document *my_file)
 
     if ((my_file->count - 1) > 0)
     {
-        char **new_size = realloc(my_file->lines, sizeof(char*) * my_file->count - 1);
+        char **new_size = realloc(my_file->lines, sizeof(char*) * (my_file->count - 1));
         if (new_size)
         {
             my_file->lines = new_size;
