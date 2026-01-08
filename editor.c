@@ -180,14 +180,13 @@ int delete_line(Document *my_file)
     for (int i = line - 1; i < my_file->count - 1; i++)
         my_file->lines[i] = my_file->lines[i + 1];
 
-    if ((my_file->count - 1) > 0)
+    my_file->count--;
+
+    if (my_file->count > 0)
     {
-        char **new_size = realloc(my_file->lines, sizeof(char*) * (my_file->count - 1));
+        char **new_size = realloc(my_file->lines, sizeof(char*) * my_file->count);
         if (new_size)
-        {
             my_file->lines = new_size;
-            my_file->count--;
-        }
         else
         {
             fprintf(stderr, "%s: realloc failed.\n", __func__);
