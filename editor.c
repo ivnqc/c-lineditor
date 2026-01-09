@@ -106,23 +106,20 @@ void free_file(Document *my_file)
 }
 
 // Read a single positive int from stdin
-int get_option(int *n)
+int get_option(char *c)
 {
-    int c, temp;
+    char buffer[3];
 
-    if (scanf("%d", &temp) != 1 || temp < 1)
-    {
-        clear_stdin();
+    if (!fgets(buffer, sizeof(buffer), stdin))
         return 0;
-    }
 
-    c = getchar();
-    if (c != '\n')
-    {
-        clear_stdin();
+    if (buffer[0] == '\n' || buffer[1] != '\n')
         return 0;
-    }
-    *n = temp;
+
+    if (!isalpha((char)buffer[0]))
+        return 0;
+
+    *c = (char)tolower((char)buffer[0]);
     return 1;
 }
 

@@ -30,7 +30,7 @@ void document_init(Document *my_file);
 // Deallocate requested memory
 void free_file(Document *my_file);
 // Read a single positive int from stdin, returns 1 on success, 0 on failure
-int get_option(int *n);
+int get_option(char *c);
 
 // Operations
 
