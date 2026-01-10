@@ -67,6 +67,7 @@ int save_file(Document *my_file)
         fputs(my_file->lines[i], file);
 
     fclose(file);
+    my_file->changed = 0;
     return 1;
 }
 
