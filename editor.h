@@ -31,6 +31,10 @@ void document_init(Document *my_file);
 void free_file(Document *my_file);
 // Read a single positive int from stdin, returns 1 on success, 0 on failure
 int get_option(char *c);
+// Return an integer
+int read_int(void);
+// Return a pointer to a dynamically allocated string
+char *read_line(FILE *fp);
 
 // Operations
 

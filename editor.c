@@ -125,6 +125,82 @@ int get_option(char *c)
     return 1;
 }
 
+// Return an integer
+int read_int(void)
+{
+    char *line = read_line(stdin);
+    if (!line) return 0;
+
+    char *endptr;
+    long value = strtol(line, &endptr, 10);
+
+    while (isspace((unsigned char)*endptr))
+        endptr++;
+    
+    if (*endptr == '\0')
+    {
+        free(line);
+        return (int)value;
+    }
+    else
+    {
+        free(line);
+        return 0;
+    }
+    
+}
+// Return a pointer to a dynamically allocated string
+char *read_line(FILE *fp)
+{
+    int size = 64;
+    int len = 0;
+
+    char *buffer = malloc(size);
+    if (!buffer)
+    {
+        fprintf(stderr, "%s: malloc failed.\n", __func__);
+        return NULL;
+    }
+
+    int ch;
+    while ((ch = fgetc(fp)) != EOF && ch != '\n')
+    {
+        buffer[len] = (char)ch;
+        len++;
+
+        if (len + 1 >= size)
+        {
+            size *= 2;
+            char *tmp = realloc(buffer, size);
+            if (!tmp)
+            {
+                fprintf(stderr, "%s: realloc failed.\n", __func__);
+                free(buffer);
+                return NULL;
+            }
+            buffer = tmp;
+        }
+
+    }
+    if (len == 0 && ch == EOF)
+    {
+        free(buffer);
+        return NULL;
+    }
+    
+    buffer[len] = '\0';
+
+    // shrink only if more than 50% unused
+    if (len + 1 < size / 2)
+    {
+        char *shrink = realloc(buffer, len + 1);
+        if (shrink)
+            buffer = shrink;
+    }
+
+    return buffer;
+}
+
 // Operations
 
 // Add a line at the end
