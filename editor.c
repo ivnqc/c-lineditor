@@ -295,7 +295,7 @@ int edit_line(Document *my_file)
         return 0;
     }
 
-    printf("Current: %s", my_file->lines[line_num - 1]);
+    printf("Current: %s\n", my_file->lines[line_num - 1]);
     char *current_line = my_file->lines[line_num - 1];
 
     printf("New line: ");
