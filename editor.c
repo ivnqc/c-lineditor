@@ -122,6 +122,19 @@ int get_option(char *c)
     return 1;
 }
 
+// Display the menu
+void print_menu(void)
+{
+    printf("Options:\n");
+    printf("[a]ppend\n");
+    printf("[d]elete\n");
+    printf("[e]dit\n");
+    printf("[i]nsert\n");
+    printf("[s]ave\n");
+    printf("[q]uit\n");
+    printf(":");
+}
+
 // Return an integer
 int read_int(void)
 {

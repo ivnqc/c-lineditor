@@ -27,16 +27,8 @@ int main(int argc, char *argv[])
     while (running)
     {
         print_file(&myfile);
-
-        printf("Options:\n");
-        printf("[1] Edit\n");
-        printf("[2] Delete\n");
-        printf("[3] Append\n");
-        printf("[4] Insert\n");
-        printf("[5] Save and quit\n");
-        printf("[6] Quit\n");
-        printf(":");
-
+        print_menu();
+        
         // Ensure the program proceeds only after a valid menu choice
         int option = 0;
         if (!get_option(&option) || option < 1 || option > 6)
