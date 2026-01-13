@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
     {
         print_file(&myfile);
         print_menu();
-        
+
         // Ensure the program proceeds only after a valid menu choice
-        int option = 0;
-        if (!get_option(&option) || option < 1 || option > 6)
+        char option;
+        if (!get_option(&option))
         {
             printf("Invalid option.\n");
             continue;
@@ -39,23 +39,24 @@ int main(int argc, char *argv[])
 
         switch (option)
         {
-            case 1: 
-                edit_line(&myfile); 
-                break;
-            case 2: 
-                delete_line(&myfile); 
-                break;
-            case 3:
+            case 'a': 
                 append_line(&myfile); 
                 break;
-            case 4:
+            case 'd': 
+                delete_line(&myfile); 
+                break;
+            case 'e':
+                edit_line(&myfile); 
+                break;
+            case 'i':
                 insert_line(&myfile);
                 break;
-            case 5:
-                save = 1;
-                running = 0;
+            case 's':
+                save_file(&myfile);
+                //save = 1;
+                //running = 0;
                 break;
-            case 6:
+            case 'q':
                 running = 0;
                 break;
             default:
