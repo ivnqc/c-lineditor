@@ -1,9 +1,6 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-// Maximum length per line
-#define MAX_LINE 1024
-
 typedef struct Document {
     char **lines; // Allocated strings
     int count; // Total allocated strings
