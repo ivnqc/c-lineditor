@@ -10,7 +10,6 @@
 
 // File I/O
 
-// Load a file into memory
 int load_file(const char *filename, Document *my_file)
 {
     my_file->filename = strdup(filename);
@@ -21,7 +20,6 @@ int load_file(const char *filename, Document *my_file)
     }
     
     FILE *file = fopen(filename, "r");
-    // Allow new files to be created while still reporting genuine I/O failures
     if (!file)
     {
         if (errno == ENOENT) return 1;
@@ -51,7 +49,6 @@ int load_file(const char *filename, Document *my_file)
     return 1;
 }
 
-// Save the file and any changes made
 int save_file(Document *my_file)
 {
     FILE *file = fopen(my_file->filename, "w");
@@ -71,14 +68,12 @@ int save_file(Document *my_file)
 
 // Helpers
 
-// Discard all leftover input from stdin until it reaches either '\n' or EOF
 void clear_stdin(void)
 {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-// Initialize a Document structure
 void document_init(Document *my_file)
 {
     my_file->lines = NULL;
@@ -88,7 +83,6 @@ void document_init(Document *my_file)
     my_file->new = 1;
 }
 
-// Deallocate requested memory
 void free_file(Document *my_file)
 {
     if (my_file->filename)
@@ -104,7 +98,6 @@ void free_file(Document *my_file)
     document_init(my_file);
 }
 
-// Read a single positive int from stdin
 int get_option(char *c)
 {
     char buffer[3];
@@ -122,7 +115,6 @@ int get_option(char *c)
     return 1;
 }
 
-// Display the menu
 void print_menu(void)
 {
     printf("Options:\n");
@@ -135,7 +127,6 @@ void print_menu(void)
     printf(":");
 }
 
-// Return an integer
 int read_int(void)
 {
     char *line = read_line(stdin);
@@ -159,7 +150,7 @@ int read_int(void)
     }
     
 }
-// Return a pointer to a dynamically allocated string
+
 char *read_line(FILE *fp)
 {
     int size = 64;
@@ -213,7 +204,6 @@ char *read_line(FILE *fp)
 
 // Operations
 
-// Add a line at the end
 int append_line(Document *my_file)
 {
     printf("Enter new line: ");
@@ -234,7 +224,6 @@ int append_line(Document *my_file)
     return 1;
 }
 
-// Delete a specific line
 int delete_line(Document *my_file)
 {
     if (!my_file->count)
@@ -278,7 +267,6 @@ int delete_line(Document *my_file)
     return 1;
 }
 
-// Edit a specific line
 int edit_line(Document *my_file)
 {
     if (!my_file->count)
@@ -308,7 +296,6 @@ int edit_line(Document *my_file)
     return 1;
 }
 
-// Insert a line in a specific place
 int insert_line(Document *my_file)
 {
     if (!my_file->count)
@@ -343,7 +330,6 @@ int insert_line(Document *my_file)
     return 1;
 }
 
-// Print the file content
 void print_file(Document *my_file)
 {
     printf("\n--- c-lineditor v0.1.0 ---\n");

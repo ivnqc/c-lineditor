@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
         print_file(&myfile);
         print_menu();
 
-        // Ensure the program proceeds only after a valid menu choice
         char option;
         if (!get_option(&option))
         {
