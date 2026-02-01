@@ -29,13 +29,7 @@ int main(int argc, char *argv[])
         print_file(&myfile);
         print_menu();
 
-        char option;
-        if (!get_option(&option))
-        {
-            printf("Invalid option.\n");
-            continue;
-        }
-
+        char option = read_char();
         switch (option)
         {
             case 'a': 
@@ -59,6 +53,7 @@ int main(int argc, char *argv[])
                 running = 0;
                 break;
             default:
+                printf("Invalid option.\n");
                 continue;
         }
     }

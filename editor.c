@@ -127,6 +127,25 @@ void print_menu(void)
     printf(":");
 }
 
+int read_char(void)
+{
+    char *line = read_line(stdin);
+    if (!line) return 0;
+
+    char *p = line;
+    while (isspace((unsigned char)*p))
+        p++;
+
+    int c;
+    if (*p != '\0')
+        c = (unsigned char)*p;
+    else
+        c = 0;
+
+    free(line);
+    return c;
+}
+
 int read_int(void)
 {
     char *line = read_line(stdin);

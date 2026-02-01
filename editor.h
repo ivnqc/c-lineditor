@@ -37,6 +37,9 @@ int get_option(char *c);
 // Print the main menu with available operations (append, delete, edit, insert, save, quit)
 // and a prompt. Does not read input.
 void print_menu(void);
+// Read a single non-whitespace character from stdin.
+// Return the character as int, or 0 if input is empty or only whitespace.
+int read_char(void);
 // Read a line from stdin and parse it as a decimal integer. Returns the parsed integer
 // on success, 0 on EOF, invalid input, or parse failure (non-numeric characters).
 int read_int(void);
