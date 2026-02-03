@@ -68,12 +68,6 @@ int save_file(Document *my_file)
 
 // Helpers
 
-void clear_stdin(void)
-{
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 void document_init(Document *my_file)
 {
     my_file->lines = NULL;
@@ -96,23 +90,6 @@ void free_file(Document *my_file)
         free(my_file->lines);
     }
     document_init(my_file);
-}
-
-int get_option(char *c)
-{
-    char buffer[3];
-
-    if (!fgets(buffer, sizeof(buffer), stdin))
-        return 0;
-
-    if (buffer[0] == '\n' || buffer[1] != '\n')
-        return 0;
-
-    if (!isalpha((char)buffer[0]))
-        return 0;
-
-    *c = (char)tolower((char)buffer[0]);
-    return 1;
 }
 
 void print_menu(void)

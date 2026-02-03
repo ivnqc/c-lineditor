@@ -22,18 +22,12 @@ int save_file(Document *my_file);
 
 // Helpers
 
-// Consume remaining input from stdin up to and including '\n', or until EOF.
-// Useful after failed input validation to prevent leftover characters from affecting next read.
-void clear_stdin(void);
 // Zero-initialize a Document to empty state: no filename, no lines, not yet saved.
 // Must be called before using Document. Does not allocate memory.
 void document_init(Document *my_file);
 // Free all allocated memory in Document (filename and all lines), then reinitialize.
 // Safe to call on already-freed or uninitialized Documents.
 void free_file(Document *my_file);
-// Read a single alphabetic character from stdin and store its lowercase form in c.
-// Returns 1 on success, 0 if input is not exactly one alphabetic character followed by newline.
-int get_option(char *c);
 // Print the main menu with available operations (append, delete, edit, insert, save, quit)
 // and a prompt. Does not read input.
 void print_menu(void);
