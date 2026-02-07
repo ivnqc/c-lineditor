@@ -125,22 +125,20 @@ int read_int(void)
     char *line = read_line(stdin);
     if (!line) return 0;
 
-    char *endptr;
-    long value = strtol(line, &endptr, 10);
-
-    while (isspace((unsigned char)*endptr))
-        endptr++;
+    char *p = line;
+    while (*p) 
+    {
+        if (!isdigit((unsigned char)*p)) 
+        {
+            free(line);
+            return 0;
+        }
+        p++;
+    }
     
-    if (*endptr == '\0')
-    {
-        free(line);
-        return (int)value;
-    }
-    else
-    {
-        free(line);
-        return 0;
-    }
+    int value = atoi(line);
+    free(line);
+    return value;
 }
 
 char *read_line(FILE *fp)
