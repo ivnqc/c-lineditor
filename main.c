@@ -46,34 +46,16 @@ int main(int argc, char *argv[])
                 break;
             case 's':
                 save_file(&myfile);
-                //save = 1;
-                //running = 0;
                 break;
             case 'q':
-                running = 0;
+                running = cmd_exit(&myfile);
                 break;
             default:
                 printf("Invalid option.\n");
                 continue;
         }
     }
-
-    if (save)
-    {
-        if (save_file(&myfile))
-            printf("File saved.\n");
-        else
-        {
-            printf("Error saving file.\n");
-            free_file(&myfile);
-            return 1;
-        }
-    }
-    else if (save == 0 && myfile.changed)
-        printf("Changes discarded.\n");
-    else
-        printf("Bye!\n");
-
+    printf("Bye!\n");
     free_file(&myfile);
     return 0;
 }

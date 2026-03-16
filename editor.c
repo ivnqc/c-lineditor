@@ -68,6 +68,39 @@ int save_file(Document *my_file)
 
 // Helpers
 
+int cmd_exit(Document *my_file)
+{
+    if (!my_file->changed)
+        return 0;
+
+    printf("Save changes before exiting? (y/n): ");
+
+    char *line = read_line(stdin);
+    if (!line)
+        return 1;
+
+    if (line[0] == 'y' || line[0] == 'Y')
+    {
+        if (!save_file(my_file))
+        {
+            printf("Error saving file.\n");
+            return 1;
+        }
+
+        printf("File saved.\n");
+        return 0;
+    }
+
+    if (line[0] == 'n' || line[0] == 'N')
+    {
+        printf("Changes discarded.\n");
+        return 0;
+    }
+    
+    // Cancel exit
+    return 1;
+}
+
 void document_init(Document *my_file)
 {
     my_file->lines = NULL;

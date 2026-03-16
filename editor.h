@@ -22,6 +22,8 @@ int save_file(Document *my_file);
 
 // Helpers
 
+// Prompt user to save changes if file has been modified.
+int cmd_exit(Document *my_file);
 // Zero-initialize a Document to empty state: no filename, no lines, not yet saved.
 // Must be called before using Document. Does not allocate memory.
 void document_init(Document *my_file);
