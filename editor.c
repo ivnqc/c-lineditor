@@ -75,7 +75,7 @@ int cmd_exit(Document *my_file)
 
     printf("Save changes before exiting? (y/n): ");
 
-    int c = read_char();
+    int c = read_char(stdin);
 
     if (c == 'y' || c == 'Y')
     {
@@ -135,9 +135,9 @@ void print_menu(void)
     printf(":");
 }
 
-int read_char(void)
+int read_char(FILE *fp)
 {
-    char *line = read_line(stdin);
+    char *line = read_line(fp);
     if (!line) return 0;
 
     if (line[0] == '\0' || line[1] != '\0') 
@@ -151,9 +151,9 @@ int read_char(void)
     return c;
 }
 
-int read_int(void)
+int read_int(FILE *fp)
 {
-    char *line = read_line(stdin);
+    char *line = read_line(fp);
     if (!line) return 0;
 
     char *p = line;
@@ -253,7 +253,7 @@ int delete_line(Document *my_file)
         return 0;
     }
     printf("Delete which line? (%d-%d): ", my_file->count ? 1 : 0, my_file->count);
-    int line_num = read_int();
+    int line_num = read_int(stdin);
     if (line_num < 1 || line_num > my_file->count)
     {
         printf("Invalid line number\n");
@@ -297,7 +297,7 @@ int edit_line(Document *my_file)
     }
 
     printf("Edit which line? (%d-%d): ", my_file->count ? 1 : 0, my_file->count);
-    int line_num = read_int();
+    int line_num = read_int(stdin);
     if (line_num < 1 || line_num > my_file->count)
     {
         printf("Invalid line number\n");
@@ -323,7 +323,7 @@ int insert_line(Document *my_file)
         return append_line(my_file);
     
     printf("Insert at which line? (%d-%d): ", my_file->count ? 1 : 0, my_file->count ? my_file->count : 0);
-    int line_num = read_int();
+    int line_num = read_int(stdin);
     if (line_num < 1 || line_num > my_file->count)
     {
         printf("Invalid line number\n");

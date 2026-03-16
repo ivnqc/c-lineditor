@@ -35,10 +35,10 @@ void free_file(Document *my_file);
 void print_menu(void);
 // Read a single non-whitespace character from stdin.
 // Return the character as int, or 0 if input is empty or only whitespace.
-int read_char(void);
+int read_char(FILE *fp);
 // Read a line from stdin and parse it as a decimal integer. Returns the parsed integer
 // on success, 0 on EOF, invalid input, or parse failure (non-numeric characters).
-int read_int(void);
+int read_int(FILE *fp);
 // Read a line from file up to '\n' or EOF into dynamically allocated memory.
 // Returns a null-terminated string (newline stripped), or NULL on EOF with no input
 // or on memory allocation failure. Caller must free the returned string.
