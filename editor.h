@@ -35,7 +35,7 @@ void free_file(Document *my_file);
 void print_menu(void);
 // Read a single non-whitespace character from stdin.
 // Return the character as int, or 0 if input is empty or only whitespace.
-int read_char(FILE *fp);
+int read_char(FILE *fp, int *out);
 // Read a line from stdin and parse it as a decimal integer. Returns the parsed integer
 // on success, 0 on EOF, invalid input, or parse failure (non-numeric characters).
 int read_int(FILE *fp);

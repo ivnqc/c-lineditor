@@ -29,7 +29,10 @@ int main(int argc, char *argv[])
         print_file(&myfile);
         print_menu();
 
-        char option = read_char(stdin);
+        int option;
+        int status = read_char(stdin, &option);
+        if (status == -1) break;
+
         switch (option)
         {
             case 'a': 

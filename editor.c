@@ -75,9 +75,16 @@ int cmd_exit(Document *my_file)
 
     printf("Save changes before exiting? (y/n): ");
 
-    int c = read_char(stdin);
+    int c;
+    int status = read_char(stdin, &c);
+    // Treat EOF as exit
+    if (status == -1) return 0;
+    // Invalid input
+    if (status == 0) return 1;
 
-    if (c == 'y' || c == 'Y')
+    c = tolower(c);
+
+    if (c == 'y')
     {
         if (!save_file(my_file))
         {
@@ -89,7 +96,7 @@ int cmd_exit(Document *my_file)
         return 0;
     }
 
-    if (c == 'n' || c == 'N')
+    if (c == 'n')
     {
         printf("Changes discarded.\n");
         return 0;
@@ -135,20 +142,24 @@ void print_menu(void)
     printf(":");
 }
 
-int read_char(FILE *fp)
+int read_char(FILE *fp, int *out)
 {
     char *line = read_line(fp);
-    if (!line) return 0;
+    // Input EOF
+    if (!line) return -1;
 
     if (line[0] == '\0' || line[1] != '\0') 
     {
         free(line);
+        // Input error
+        // Either zero or more than one character
         return 0;
     }
 
-    int c = (unsigned char)line[0];
+    *out = (unsigned char)line[0];
     free(line);
-    return c;
+    // Input OK
+    return 1;
 }
 
 int read_int(FILE *fp)
