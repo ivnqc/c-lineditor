@@ -75,11 +75,9 @@ int cmd_exit(Document *my_file)
 
     printf("Save changes before exiting? (y/n): ");
 
-    char *line = read_line(stdin);
-    if (!line)
-        return 1;
+    int c = read_char();
 
-    if (line[0] == 'y' || line[0] == 'Y')
+    if (c == 'y' || c == 'Y')
     {
         if (!save_file(my_file))
         {
@@ -91,7 +89,7 @@ int cmd_exit(Document *my_file)
         return 0;
     }
 
-    if (line[0] == 'n' || line[0] == 'N')
+    if (c == 'n' || c == 'N')
     {
         printf("Changes discarded.\n");
         return 0;
