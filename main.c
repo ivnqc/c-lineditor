@@ -20,9 +20,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Track whether the user wants to save the file
-    int save = 0;
-
     int running = 1;
     while (running)
     {
